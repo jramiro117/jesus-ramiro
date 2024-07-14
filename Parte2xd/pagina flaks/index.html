@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Flask</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>FORMULARIO</h1>
+        </div>
+
+        <form action="{{ url_for('create') }}" method="post" class="form">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apellido_paterno">Apellido Paterno:</label>
+                <input type="text" id="apellido_paterno" name="apellido_paterno" required>
+            </div>
+            <div class="form-group">
+                <label for="apellido_materno">Apellido Materno:</label>
+                <input type="text" id="apellido_materno" name="apellido_materno" required>
+            </div>
+            <div class="form-group">
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" name="edad" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-actions">
+                <button type="submit">Registrar</button>
+            </div>
+        </form>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Edad</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registro in registros %}
+                <tr>
+                    <td>{{ registro.id }}</td>
+                    <td>{{ registro.nombre }}</td>
+                    <td>{{ registro.apellido_paterno }}</td>
+                    <td>{{ registro.apellido_materno }}</td>
+                    <td>{{ registro.edad }}</td>
+                    <td>{{ registro.email }}</td>
+                    <td>
+                        <form action="{{ url_for('update', id=registro.id) }}" method="post" style="display:inline;">
+                            <button type="submit">Actualizar</button>
+                        </form>
+                        <form action="{{ url_for('delete', id=registro.id) }}" method="post" style="display:inline;">
+                            <button type="submit">Borrar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 20px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        text-align: center;
+    }
+    
+    .header {
+        margin-bottom: 20px;
+    }
+    
+    .profile-pic {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+    }
+    
+    h1 {
+        font-size: 24px;
+        color: #333;
+        margin: 10px 0;
+    }
+    
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .form-group {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .form-group label {
+        margin-bottom: 5px;
+        color: #555;
+    }
+    
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+    
+    .form-actions button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007BFF;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .form-actions button:hover {
+        background-color: #0056b3;
+    }
+    
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    
+    .data-table th, .data-table td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+    
+    .data-table th {
+        background-color: #f4f4f4;
+    }
+    
+    .data-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    
+    .data-table button {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #28a745;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .data-table button:hover {
+        background-color: #218838;
+    }
+    
+    .data-table form {
+        display: inline;
+    }
+    
+    @media (max-width: 768px) {
+        .form-group {
+            width: 100%;
+        }
+        
+        .form-group input {
+            width: calc(100% - 20px);
+        }
+        
+        .form-actions {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .data-table th, .data-table td {
+            padding: 8px;
+        }
+        
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+        }
+    }
+    
+</style>

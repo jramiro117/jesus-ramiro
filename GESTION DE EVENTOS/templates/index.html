@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css"/>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container register-container">
+            <form id="registro-form" method="POST" action="{{ url_for('registro') }}">
+                <h1>Registro</h1>
+                <input type="text" name="nombre" placeholder="Nombre" required>
+                <input type="email" name="correo" placeholder="Email" required>
+                <input type="password" name="clave" placeholder="Contraseña" required>
+                <select name="rolId" required>
+                    <option value="" disabled selected>Seleccione su rol</option>
+                    <option value="1">Organizador</option>
+                    <option value="2">Asistente</option>
+                </select>
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+
+        <div class="form-container login-container">
+            <form id="login-form" method="POST" action="#">
+                <h1>Iniciar Sesión</h1>
+                <input type="email" name="correo" placeholder="Email" required>
+                <input type="password" name="clave" placeholder="Contraseña" required>
+                <button type="submit">Ingresar</button>
+            </form>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1 class="title">Hola <br> Bienvenid@</h1>
+                    <p>Si tienes una cuenta, inicia sesión aquí</p>
+                    <button class="ghost" id="login">Ingresar
+                        <i class="lni lni-arrow-left login"></i>
+                    </button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1 class="title">Ingresa ya <br> ¿qué esperas?</h1>
+                    <p>Crea una cuenta gratis y empieza a disfrutar de nuestras opciones</p>
+                    <button class="ghost" id="register">Registrate
+                        <i class="lni lni-arrow-right register"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
